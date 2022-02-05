@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Properties>
+    <Property name="LOG_DIR">logs</Property>
+    <Property name="LOGFILENAME">benchmarktests.log</Property>
+  </Properties>
+  <Appenders>
+    <Console name="ConsoleAppender" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{ISO8601};%t;%x;%c{1};%M;%1p;-%m%n" />
+    </Console>
+    <RollingFile name="FileAppender" 
+                 fileName="${LOG_DIR}/${LOGFILENAME}"
+                 filePattern="${LOG_DIR}/${LOGFILENAME}.%i"
+                 ignoreExceptions="false"
+                 immediateFlush="true">
+      <PatternLayout pattern="%d{ISO8601};%t;%x;%c{1};%M;%1p;-%m%n" />
+      <Policies>
+        <SizeBasedTriggeringPolicy size="1MB" />
+      </Policies>
+      <DefaultRolloverStrategy max="5" />
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Logger name="de.benchmark" level="debug">
+      <AppenderRef ref="FileAppender" />
+    </Logger>  
+    <Root level="debug">
+      <AppenderRef ref="ConsoleAppender" />
+    </Root>
+  </Loggers>
+</Configuration>
