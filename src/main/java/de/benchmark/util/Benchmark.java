@@ -39,7 +39,7 @@ public class Benchmark {
 
 				benched.add(pre.getName());
 			} catch (Exception ex) {
-				LOG.error(ex.getMessage());
+				LOG.error("measuring performance of: {} failed with message: {}", pre.getName(), ex.getMessage());
 			}
 		});
 
