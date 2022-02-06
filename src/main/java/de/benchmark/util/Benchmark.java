@@ -28,11 +28,11 @@ public class Benchmark {
 
 		pres.forEach(pre -> {
 			try {
-				long startTime = System.currentTimeMillis();
+				long startTime = System.nanoTime();
 				boolean result = pre.getPredicate().test(testParam);
-				long duration = System.currentTimeMillis() - startTime;
+				long duration = System.nanoTime() - startTime;
 
-				LOG.info("measuring performance of: {}, result: {}, took: {} ms",
+				LOG.info("measuring performance of: {}, result: {}, took: {} ns",
 						pre.getName(),
 						result,
 						duration);
@@ -64,11 +64,11 @@ public class Benchmark {
 
 		LOG.debug("measuring performance of: {}", title);
 
-		final long startTime = System.currentTimeMillis();
+		final long startTime = System.nanoTime();
 		R returnValue = fn.apply(param);
-		runningTime = System.currentTimeMillis() - startTime;
+		runningTime = System.nanoTime() - startTime;
 
-		LOG.debug("Runningtime: {}", runningTime);
+		LOG.debug("Running time (ns): {}", runningTime);
 		return returnValue;
 	}
 
