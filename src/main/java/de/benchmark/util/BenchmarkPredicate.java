@@ -1,4 +1,4 @@
-package de.benchmark.utils;
+package de.benchmark.util;
 
 import java.util.function.Predicate;
 

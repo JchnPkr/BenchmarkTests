@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
-import de.benchmark.utils.Benchmark;
-import de.benchmark.utils.BenchmarkPredicate;
+import de.benchmark.util.Benchmark;
+import de.benchmark.util.BenchmarkPredicate;
 
-class StringCheckTest {
+class StringEvaluationBenchmarkTest {
 	@Test
-	void stringEvaluationBenchmarkTest() {
+	void stringIsEmptyBenchmarkTest() {
 		Predicate<String> elvis = (str) -> {
 			return str == null || str.isEmpty() ? false : true;
 		};
