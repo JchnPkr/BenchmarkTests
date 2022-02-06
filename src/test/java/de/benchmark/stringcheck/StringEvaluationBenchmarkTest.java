@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import de.benchmark.util.Benchmark;
@@ -33,7 +34,7 @@ class StringEvaluationBenchmarkTest {
 		assertThat(benched).hasSameElementsAs(Collections.emptyList());
 	}
 
-	@Test
+	@RepeatedTest(3)
 	void stringIsEmptyBenchmarkTest() {
 		Predicate<String> elvis = (str) -> {
 			return str == null || str.isEmpty() ? true : false;
@@ -77,7 +78,7 @@ class StringEvaluationBenchmarkTest {
 				pres.stream().map(pre -> pre.getName()).collect(Collectors.toList()));
 	}
 
-	@Test
+	@RepeatedTest(3)
 	void stringContainsPerformanceTest() {
 		String content = "this is a test string";
 		String contains = "is a";
@@ -99,6 +100,6 @@ class StringEvaluationBenchmarkTest {
 		assertAll(
 				() -> assertTrue(resultSimpleString),
 				() -> assertTrue(resultApacheString),
-				() -> assertTrue(stringContainsRunningtime < apacheContainsRunningtime));
+				() -> assertTrue(stringContainsRunningtime < apacheContainsRunningtime, "Apache commons war mal schneller"));
 	}
 }

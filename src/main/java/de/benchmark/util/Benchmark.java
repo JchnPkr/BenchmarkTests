@@ -7,9 +7,12 @@ import java.util.function.Function;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Benchmark {
+public final class Benchmark {
 	private static Logger LOG = LogManager.getLogger();
 	private static long runningTime = 0L;
+
+	private Benchmark() {
+	}
 
 	/**
 	 * Logs the running time of the given predicates and returns their names
