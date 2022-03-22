@@ -26,6 +26,41 @@ public final class Benchmark {
 	 * @param testParam parameter to test with
 	 * @return names of tested predicates
 	 */
+	public static <T> List<String> benchmark(List<BenchmarkSupplier<T>> supps) {
+		List<String> benched = new ArrayList<>();
+
+		supps.forEach(supp -> {
+			try {
+				long startTime = System.nanoTime();
+				T result = supp.getSupplier().get();
+				long duration = System.nanoTime() - startTime;
+
+				LOG.info("measuring performance of: {}, result: {}, took: {} ns",
+						supp.getName(),
+						result,
+						duration);
+
+				benched.add(supp.getName());
+			} catch (Exception ex) {
+				LOG.error("measuring performance of: {} failed with message: {}", supp.getName(), ex.getMessage());
+			}
+		});
+
+		return benched;
+	}
+
+	/**
+	 * Logs the running time of the given predicates and returns their names
+	 * afterwards. An error occurring during a test won't interfere with other tests
+	 * and only be logged, although the failed test will not be in the returned list
+	 * of executed tests. This method is intended for simple duration comparison of
+	 * different algorithm implementations.
+	 * 
+	 * @param <T>       type to test
+	 * @param pres      list of predicates to test
+	 * @param testParam parameter to test with
+	 * @return names of tested predicates
+	 */
 	public static <T> List<String> benchmark(List<BenchmarkPredicate<T>> pres, T testParam) {
 		List<String> benched = new ArrayList<>();
 
